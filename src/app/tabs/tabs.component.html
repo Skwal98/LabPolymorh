@@ -1,6 +1,10 @@
-<p>tabs works!</p>
-<ng-container
-  *polymorpheusOutlet="content as primitive; context: getContext(tab)"
+<div
+    *ngFor="let tab of tabs"
+    class="tab"
+    [class.tab_active]="isActive(tab)"
+    (click)="onClick(tab)"
 >
-  {{ primitive }}
-</ng-container>
+    <ng-container *polymorpheusOutlet="content as primitive; context: getContext(tab)">
+        {{primitive}}
+    </ng-container>
+</div>

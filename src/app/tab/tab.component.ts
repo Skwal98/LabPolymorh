@@ -21,7 +21,7 @@ export class TabComponent {
     return this.context.$implicit.text;
   }
 
-  get content(): PolymorpheusContent<never> | undefined {
+  get content(): PolymorpheusContent<any> | undefined {
     return this.context.$implicit.content;
   }
 
@@ -43,5 +43,5 @@ export class TabComponent {
 
 export interface CustomTab {
   text: string;
-  content?: PolymorpheusContent<never>;
+  content?: PolymorpheusContent<any>;
 }

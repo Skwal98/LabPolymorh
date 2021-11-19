@@ -15,15 +15,29 @@ export class TabsComponent<T> implements OnInit {
   tabs: ReadonlyArray<T> = [];
 
   @Input()
+  activeTab: T | null = null;
+
+  @Input()
   content: PolymorpheusContent<ContextWithActive<T>> = ({
     $implicit,
-  }: ContextWithActive<T>) => String($implicit);
+  }: ContextWithActive<T>) => {
+    return String($implicit);
+  };
 
   getContext($implicit: T): ContextWithActive<T> {
+    console.log($implicit);
     return {
       $implicit,
       active: true,
     };
+  }
+
+  isActive(tab: T): boolean {
+    return tab === this.activeTab;
+  }
+
+  onClick(tab: T) {
+    this.activeTab = tab;
   }
 }
 
