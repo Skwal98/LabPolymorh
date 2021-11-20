@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { PolymorphContent } from 'src/app/custom-polymorpheus/types/content';
 
 @Component({
@@ -7,10 +7,12 @@ import { PolymorphContent } from 'src/app/custom-polymorpheus/types/content';
   styleUrls: ['./my-tabs.component.scss'],
 })
 export class MyTabsComponent<T> implements OnInit {
-  @Input('content') content!: PolymorphContent<T>;
+  @Input('content') content: PolymorphContent<T> = ($implicit: T) => {
+    return String($implicit);
+  };
   @Input('context') context!: T;
 
-  constructor() {}
+  constructor(private _cd: ChangeDetectorRef) {}
 
   ngOnInit(): void {}
 }

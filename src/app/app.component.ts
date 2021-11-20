@@ -17,6 +17,7 @@ export class AppComponent {
 
   myContext: number = 4;
   myComponentContent = new PolymorphComponentWrapper(MyTabComponent);
+  myPrimitiveContent = 'test string as primitive';
 
   constructor(private _cd: ChangeDetectorRef) {}
   //https://github.com/TinkoffCreditSystems/ng-polymorpheus/blob/v4.0.0/projects/ng-polymorpheus/src/classes/component.ts

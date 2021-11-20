@@ -34,18 +34,18 @@ export class PolymorphOutletDirective<T> implements OnChanges {
       const componentFactory = this._injector
         .get(ComponentFactoryResolver)
         .resolveComponentFactory(content.component);
-      const componentRef = this._viewContainerRef.createComponent(
-        componentFactory,
-        0,
-        injector
-      );
+      this._viewContainerRef.createComponent(componentFactory, 0, injector);
     } else if (isTemplate(this.content)) {
       const content = this.content as TemplateRef<unknown>;
-      const embeddedViewRef = this._viewContainerRef.createEmbeddedView(
+      this._viewContainerRef.createEmbeddedView(
         content,
         new PrimitiveContext(this.context)
       );
-      embeddedViewRef.detectChanges();
+    } else {
+      this._viewContainerRef.createEmbeddedView(
+        this._templateRef,
+        new PrimitiveContext(this.context)
+      );
     }
   }
 }
