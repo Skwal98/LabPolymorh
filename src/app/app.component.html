@@ -15,3 +15,10 @@
     alt="Avatar"
   />
 </ng-template>
+
+<app-my-tabs [content]="myTemplate" [context]="myContext"></app-my-tabs>
+<br />
+<hr />
+<ng-template #myTemplate let-foo="$implicit">
+  One two {{ foo }} three
+</ng-template>

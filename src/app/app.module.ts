@@ -6,9 +6,17 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TabComponent } from './tab/tab.component';
 import { TabsComponent } from './tabs/tabs.component';
+import { MyTabsComponent } from './my-tab/my-tabs/my-tabs.component';
+import { PolymorphOutletDirective } from './custom-polymorpheus/directives/outlet.directive';
 
 @NgModule({
-  declarations: [AppComponent, TabComponent, TabsComponent],
+  declarations: [
+    AppComponent,
+    TabComponent,
+    TabsComponent,
+    MyTabsComponent,
+    PolymorphOutletDirective,
+  ],
   imports: [BrowserModule, AppRoutingModule, PolymorpheusModule],
   providers: [],
   bootstrap: [AppComponent],
