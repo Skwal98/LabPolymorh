@@ -8,6 +8,7 @@ import { TabComponent } from './tab/tab.component';
 import { TabsComponent } from './tabs/tabs.component';
 import { MyTabsComponent } from './my-tab/my-tabs/my-tabs.component';
 import { PolymorphOutletDirective } from './custom-polymorpheus/directives/outlet.directive';
+import { MyTabComponent } from './my-tab/my-tab/my-tab.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { PolymorphOutletDirective } from './custom-polymorpheus/directives/outle
     TabsComponent,
     MyTabsComponent,
     PolymorphOutletDirective,
+    MyTabComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, PolymorpheusModule],
   providers: [],

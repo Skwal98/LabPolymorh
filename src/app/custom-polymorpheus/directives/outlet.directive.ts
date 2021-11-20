@@ -1,4 +1,5 @@
 import {
+  ComponentFactoryResolver,
   Directive,
   Injector,
   Input,
@@ -7,6 +8,7 @@ import {
   TemplateRef,
   ViewContainerRef,
 } from '@angular/core';
+import { PolymorphComponentWrapper } from '../classes/component';
 import { PrimitiveContext } from '../classes/primitive-context';
 import { PolymorphContent } from '../types/content';
 
@@ -25,7 +27,19 @@ export class PolymorphOutletDirective<T> implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     this._viewContainerRef.clear();
-    if (isTemplate(this.content)) {
+
+    if (isComponent(this.content)) {
+      const content = this.content as PolymorphComponentWrapper<object, T>;
+      const injector = content.createInjector(this._injector, this.context);
+      const componentFactory = this._injector
+        .get(ComponentFactoryResolver)
+        .resolveComponentFactory(content.component);
+      const componentRef = this._viewContainerRef.createComponent(
+        componentFactory,
+        0,
+        injector
+      );
+    } else if (isTemplate(this.content)) {
       const content = this.content as TemplateRef<unknown>;
       const embeddedViewRef = this._viewContainerRef.createEmbeddedView(
         content,
@@ -34,6 +48,10 @@ export class PolymorphOutletDirective<T> implements OnChanges {
       embeddedViewRef.detectChanges();
     }
   }
+}
+
+function isComponent<T>(content: PolymorphContent<T>) {
+  return content instanceof PolymorphComponentWrapper;
 }
 
 function isTemplate<T>(content: PolymorphContent<T>) {

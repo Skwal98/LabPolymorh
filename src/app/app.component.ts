@@ -1,14 +1,10 @@
-import {
-  ChangeDetectorRef,
-  Component,
-  TemplateRef,
-  ViewChild,
-} from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import {
   PolymorpheusComponent,
   PolymorpheusContent,
 } from '@tinkoff/ng-polymorpheus';
-import { PolymorphContent } from './custom-polymorpheus/types/content';
+import { PolymorphComponentWrapper } from './custom-polymorpheus/classes/component';
+import { MyTabComponent } from './my-tab/my-tab/my-tab.component';
 import { CustomTab, TabComponent } from './tab/tab.component';
 
 @Component({
@@ -19,16 +15,9 @@ import { CustomTab, TabComponent } from './tab/tab.component';
 export class AppComponent {
   title = 'LabPolymorh';
 
-  myContent!: PolymorphContent<number>;
   myContext: number = 4;
-  @ViewChild('myTemplate') set myTemplate(tmpl: TemplateRef<any>) {
-    this.myContent = tmpl;
-    this._cd.detectChanges();
-  }
+  myComponentContent = new PolymorphComponentWrapper(MyTabComponent);
 
-  /**
-   *
-   */
   constructor(private _cd: ChangeDetectorRef) {}
   //https://github.com/TinkoffCreditSystems/ng-polymorpheus/blob/v4.0.0/projects/ng-polymorpheus/src/classes/component.ts
   readonly content = new PolymorpheusComponent(TabComponent);
